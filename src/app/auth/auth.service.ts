@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 interface emailAvailableResponse {
   available: boolean;
@@ -34,9 +35,9 @@ interface SigninCredentials {
 })
 export class AuthService {
   url = 'http://localhost:3000/users';
-  signedIn$ = new BehaviorSubject(false);
+  signedIn$ = new BehaviorSubject(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
   
   emailAvailable(email: string) {
     return this.http.post<emailAvailableResponse>(`${this.url}/email`, {email});
@@ -81,6 +82,10 @@ export class AuthService {
     .pipe(
       tap(() => {
         this.signedIn$.next(true)
+      }),
+      catchError((err) => {
+        console.log('this is error ' + err)
+       return this.router.navigateByUrl('/')
       })
     )
   }
