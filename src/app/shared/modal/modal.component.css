@@ -1,0 +1,17 @@
+.modal {
+    display: block !important;
+    background-color: rgb(61, 61, 61);
+}
+
+.modal-footer:empty {
+    display: none;
+}
+
+.modal-footer-default {
+    display: none;
+}
+
+.modal-footer:empty + .modal-footer-default {
+    display: block !important;
+}
+

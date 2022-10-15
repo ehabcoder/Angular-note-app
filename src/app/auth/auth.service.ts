@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, EMPTY } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -48,7 +48,9 @@ export class AuthService {
     .pipe(
       tap((data) => {
         localStorage.setItem('token', data.user.token);
-        this.signedIn$.next(true)
+        localStorage.setItem('username', data.user.name);
+        localStorage.setItem('useremail', data.user.email);
+        this.signedIn$.next(true);
       })
     )
   }
@@ -60,8 +62,10 @@ export class AuthService {
     .pipe(
       tap(() => {
         localStorage.removeItem('token');
-        this.signedIn$.next(false)
-      })
+        localStorage.removeItem('username');
+        localStorage.removeItem('useremail');
+        this.signedIn$.next(false);
+     })
     )
   }
 
@@ -70,6 +74,8 @@ export class AuthService {
     .pipe(
       tap((data) => {
         localStorage.setItem('token', data.user.token);
+        localStorage.setItem('username', data.user.name);
+        localStorage.setItem('useremail', data.user.email);
         this.signedIn$.next(true);
       }) 
     )
@@ -83,9 +89,9 @@ export class AuthService {
       tap(() => {
         this.signedIn$.next(true)
       }),
-      catchError((err) => {
-        console.log('this is error ' + err)
-       return this.router.navigateByUrl('/')
+      catchError(() => {
+         this.signedIn$.next(false)
+         return EMPTY;
       })
     )
   }

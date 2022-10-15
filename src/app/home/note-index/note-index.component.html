@@ -1,0 +1,8 @@
+<div class="list-group">
+    <ng-container *ngFor="let note of notes">
+        <a [routerLink]="note.id" class="list-group-item list-group-item-action">
+            <div class="fw-bold">{{note.title}}</div>
+            {{note.body}}
+        </a>
+    </ng-container>
+</div>

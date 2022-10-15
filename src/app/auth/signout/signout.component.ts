@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -12,7 +13,11 @@ export class SignoutComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.signout().subscribe(() => {
+    this.authService.signout().pipe(
+      catchError(() => {
+        return this.router.navigateByUrl('/')
+      })
+    ).subscribe(() => {
       // Navigate the user back to a signin page
       this.router.navigateByUrl('/')
     })

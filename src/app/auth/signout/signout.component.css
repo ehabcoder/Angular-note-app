@@ -1,4 +1,11 @@
 div {
+    display: block;
     margin: auto;
     margin-top: 3rem;
+    width: 5rem;
+    height: 5rem;
+}
+
+.div.span {
+    width: 3rem;
 }

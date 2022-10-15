@@ -8,8 +8,9 @@ import { FormControl } from '@angular/forms';
 })
 export class InputComponent implements OnInit {
   @Input() label: string;
-  @Input() control: FormControl;
+  @Input() control: FormControl | any;
   @Input() type: string;
+  @Input() controlType = 'input';
 
   constructor() { }
 

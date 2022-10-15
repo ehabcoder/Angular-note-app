@@ -1,0 +1,9 @@
+<button (click)="showModal = true" class="btn btn-dark">Send New Note</button>
+
+<app-modal (dismiss)="showModal = false" *ngIf="showModal">
+    <div modalTitle>New Note</div>
+    <app-note-form [note]="note" (noteSubmit)="onSubmit($event)"></app-note-form>
+    <div *ngIf="showAlert" class="alert alert-success mt-3">
+        {{alertText}}
+    </div>
+</app-modal>

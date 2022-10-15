@@ -1,0 +1,8 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="noteForm">
+    <app-input label="Note Title" [control]="noteForm.controls['noteTitle']"></app-input>
+    <app-input controlType="textarea" label="Note Body" [control]="noteForm.controls['noteBody']" type="textarea"></app-input>
+    <app-input controlType="checkbox" label="Disabled" [control]="noteForm.controls['noteDisabled']" type="checkbox"></app-input>
+    <app-input label="Note Owner Email" [control]="noteForm.controls['noteOwnerEmail']"></app-input>
+    <app-input label="Note Reciever Email" [control]="noteForm.controls['noteSenderEmails']"></app-input>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>

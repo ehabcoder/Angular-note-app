@@ -1,0 +1,9 @@
+<button (click)="showModal=true" class="btn btn-primary">Reply</button>
+
+<app-modal *ngIf="showModal" (dismiss)="showModal = false">
+    <div modalTitle>Reply</div>
+    <app-note-form [note]="note" (noteSubmit)="onSubmit($event)"></app-note-form>
+    <div *ngIf="showAlert" class="alert alert-success mt-3">
+        {{alertText}}
+    </div>
+</app-modal>

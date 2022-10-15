@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="header">
+        <div>
+            <h3>{{note.noteTitle}}</h3>
+            <div>
+                From: <i>{{note.noteSenderEmail}}</i>
+            </div>
+            <div>
+                To: <i>{{note.noteOwnerEmail}}</i>
+            </div>
+        </div>
+        <div>
+            <app-note-reply [note]="note"></app-note-reply>
+        </div>
+    </div>
+    <div class="body">
+        body: {{note.noteBody}}
+        <br>
+        disabled: {{note.noteDisabled}}
+    </div>
+</div>
